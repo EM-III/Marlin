@@ -23,7 +23,7 @@
 
 #define CONFIG_EXAMPLES_DIR "Creality/Ender-5 Pro/CrealityV422"
 
-//#define ENDER5_USE_BLTOUCH
+#define ENDER5_USE_BLTOUCH  //MIJ
 //#define ENDER5_USE_MICROSWISS
 
 /**
@@ -653,8 +653,8 @@
 
 // Enable PIDTEMP for PID control or MPCTEMP for Predictive Model.
 // temperature control. Disable both for bang-bang heating.
-#define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
-//#define MPCTEMP        // ** EXPERIMENTAL **
+//#define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning //MIJ
+#define MPCTEMP        // ** EXPERIMENTAL **  //MIJ
 
 #define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
@@ -677,9 +677,9 @@
     #define DEFAULT_Ki   5.86
     #define DEFAULT_Kd  91.97
   #else
-    #define DEFAULT_Kp  21.73
-    #define DEFAULT_Ki   1.54
-    #define DEFAULT_Kd  76.55
+    #define DEFAULT_Kp  49.12 //MIJ
+    #define DEFAULT_Ki   6.9  //MIJ
+    #define DEFAULT_Kd  87.43 //MIJ
   #endif
 #endif
 
@@ -701,11 +701,11 @@
   #define MPC_INCLUDE_FAN                             // Model the fan speed?
 
   // Measured physical constants from M306
-  #define MPC_BLOCK_HEAT_CAPACITY { 16.7f }           // (J/K) Heat block heat capacities.
-  #define MPC_SENSOR_RESPONSIVENESS { 0.22f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block.
-  #define MPC_AMBIENT_XFER_COEFF { 0.068f }           // (W/K) Heat transfer coefficients from heat block to room air with fan off.
+  #define MPC_BLOCK_HEAT_CAPACITY { 15.24f }           // (J/K) Heat block heat capacities. //MIJ
+  #define MPC_SENSOR_RESPONSIVENESS { 0.3167f }         // (K/s per ∆K) Rate of change of sensor temperature from heat block. //MIJ
+  #define MPC_AMBIENT_XFER_COEFF { 0.1117f }           // (W/K) Heat transfer coefficients from heat block to room air with fan off.  //MIJ
   #if ENABLED(MPC_INCLUDE_FAN)
-    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.097f }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.
+    #define MPC_AMBIENT_XFER_COEFF_FAN255 { 0.1252f }  // (W/K) Heat transfer coefficients from heat block to room air with fan on full.  //MIJ
   #endif
 
   // For one fan and multiple hotends MPC needs to know how to apply the fan cooling effect.
@@ -744,7 +744,7 @@
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  * @section bed temp
  */
-//#define PIDTEMPBED
+#define PIDTEMPBED  //MIJ
 
 //#define BED_LIMIT_SWITCHING
 
@@ -762,9 +762,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 10.00
-  #define DEFAULT_bedKi .023
-  #define DEFAULT_bedKd 305.4
+  #define DEFAULT_bedKp 174.75  //MIJ
+  #define DEFAULT_bedKi 29.13   //MIJ
+  #define DEFAULT_bedKd 699.01  //MIJ
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -1235,7 +1235,7 @@
 #if ENABLED(ENDER5_USE_MICROSWISS)
   #define DEFAULT_AXIS_STEPS_PER_UNIT { 80, 80, 800, 137.6 }
 #else
-  #define DEFAULT_AXIS_STEPS_PER_UNIT { 80, 80, 800, 93 }
+  #define DEFAULT_AXIS_STEPS_PER_UNIT { 80.12, 79.92, 800, 96.8 } //MIJ
 #endif
 
 /**
@@ -1289,7 +1289,7 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-#define CLASSIC_JERK
+//#define CLASSIC_JERK  //MIJ
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
@@ -1319,7 +1319,8 @@
  *   https://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.08  // (mm) Distance from real junction edge
+  //#define JUNCTION_DEVIATION_MM 0.08  // (mm) Distance from real junction edge  //MIJ
+  #define JUNCTION_DEVIATION_MM 0.3  // (mm) Distance from real junction edge     //MIJ
   #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
                                       // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
@@ -1348,7 +1349,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN  //MIJ
 
 // Force the use of the probe for Z-axis homing
 #define USE_PROBE_FOR_Z_HOMING
